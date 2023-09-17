@@ -20,8 +20,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductCreateComponent } from './products/product-create/product-create.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-
-
+import { TagModule } from 'primeng/tag';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,9 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     DropdownModule,
     InputTextModule,
     BrowserAnimationsModule,
-    DynamicDialogModule 
+    DynamicDialogModule,
+    TagModule,
+    HttpClientModule
     
   ],
   providers: [],

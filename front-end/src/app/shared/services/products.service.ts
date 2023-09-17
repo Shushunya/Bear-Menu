@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,7 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class ProductsService {
 
-  constructor() { }
+  _baseUrl = "185.219.79.4"
+
+
+  constructor( private http: HttpClient,) { }
 
 
   getProducts(){
@@ -15,5 +19,11 @@ export class ProductsService {
       { id: 2, calories: 150, cost: 50, name: 'Ніжки', type: "мясо" },
       { id: 3, calories: 50, cost: 5, name: 'Бульба', type: "овочі" }
     ];
+  }
+
+  getProductTypes(){
+    return [{ label: 'In Stock', value: 'INSTOCK' },
+    { label: 'Low Stock', value: 'LOWSTOCK' },
+    { label: 'Out of Stock', value: 'OUTOFSTOCK' }];
   }
 }

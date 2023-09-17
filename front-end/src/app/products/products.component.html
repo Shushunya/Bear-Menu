@@ -3,14 +3,59 @@
         <p-button label="Створити" (onClick)="createProduct()"></p-button>
     </div>
 
+
     <div class="card">
-        <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }" editMode="row" dataKey="id">
+        <p-table #dt1 [value]="products" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [globalFilterFields]="['name', 'type', 'cost', 'calories']">
+            <ng-template pTemplate="caption">
+                <div class="d-flex justify-content-between">
+                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                        (click)="clear(dt1)"></button>
+                    <span class="p-input-icon-left ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                            placeholder="Search keyword" />
+                    </span>
+                </div>
+            </ng-template>
             <ng-template pTemplate="header">
                 <tr>
-                    <th style="width:20%">Назва</th>
-                    <th style="width:20%">Тип</th>
-                    <th style="width:20%">Ціна</th>
-                    <th style="width:20%">Каллорії</th>
+                    <th style="min-width:15rem">
+                        <div class="flex align-items-center">
+                            Назва
+                            <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width:10rem">
+                        <div class="flex align-items-center">
+                            Тип
+                            <p-columnFilter field="type" matchMode="equals" display="menu">
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-dropdown [ngModel]="value" [options]="types" (onChange)="filter($event.value)"
+                                        placeholder="Any">
+                                        <ng-template let-option pTemplate="item">
+                                            <p-tag [value]="option.value" severity="success"></p-tag>
+                                        </ng-template>
+                                    </p-dropdown>
+                                </ng-template>
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width:10rem">
+                        <div class="flex align-items-center">
+                            Ціна
+                            <p-columnFilter type="numeric" field="cost" display="menu" currency="UAH"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width:15rem">
+                        <div class="flex align-items-center">
+                            Каллорії
+                            <p-columnFilter type="numeric" field="calories" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+
                     <th style="width:20%"></th>
                 </tr>
             </ng-template>
@@ -30,7 +75,8 @@
                     <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <p-dropdown [options]="types" appendTo="body" [(ngModel)]="product.type" [style]="{'width':'100%'}"></p-dropdown>
+                                <p-dropdown [options]="types" appendTo="body" [(ngModel)]="product.type"
+                                    [style]="{'width':'100%'}"></p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">
                                 {{product.type}}
@@ -44,11 +90,11 @@
                             </ng-template>
                             <ng-template pTemplate="output">
                                 {{product.cost|currency:"UAH":"symbol-narrow"}}
-                              
+
                             </ng-template>
                         </p-cellEditor>
                     </td>
-                 
+
                     <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
@@ -61,11 +107,21 @@
                     </td>
                     <td>
                         <div class="flex align-items-center justify-content-center gap-2">
-                            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
-                            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(product)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
-                            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(product, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
+                                (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
+                            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+                                (click)="onRowEditSave(product)"
+                                class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
+                                (click)="onRowEditCancel(product, ri)"
+                                class="p-button-rounded p-button-text p-button-danger"></button>
                         </div>
                     </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">Продукти, що відповідають фільтрам відсутні.</td>
                 </tr>
             </ng-template>
         </p-table>

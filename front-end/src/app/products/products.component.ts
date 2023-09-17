@@ -4,6 +4,7 @@ import { Product } from '../shared/models/product.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductsService } from '../shared/services/products.service';
+import { Table } from 'primeng/table';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -13,20 +14,18 @@ import { ProductsService } from '../shared/services/products.service';
 export class ProductsComponent implements OnInit {
 
   products!: Product[];
-
+  loading: boolean = true;
   clonedProducts: { [s: number]: Product } = {};
 
-  types = [{ label: 'In Stock', value: 'INSTOCK' },
-  { label: 'Low Stock', value: 'LOWSTOCK' },
-  { label: 'Out of Stock', value: 'OUTOFSTOCK' }]
+  types : any;
 
   ref: DynamicDialogRef | undefined;
 
   constructor(public dialogService: DialogService,
-              public productsService: ProductsService) { }
+    public productsService: ProductsService) { }
 
   ngOnInit(): void {
-      this.getProducts();
+    this.getProducts();
   }
 
   onRowEditInit(product: Product) {
@@ -56,11 +55,16 @@ export class ProductsComponent implements OnInit {
     this.ref.onClose.subscribe(() => {
       this.getProducts();
     });
-
- 
   }
 
-  private getProducts(){
+  clear(table: Table) {
+    table.clear();
+}
+
+
+  private getProducts() {
     this.products = this.productsService.getProducts();
+    this.types = this.productsService.getProductTypes();
+    this.loading = false;
   }
 }
