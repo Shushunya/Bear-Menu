@@ -1,4 +1,32 @@
-<div>
-        
+<div [formGroup]="productForm">
+    <div class="d-flex flex-column ">
+        <label for="name">Назва</label>
+        <input pInputText type="text" formControlName="name">
+    </div>
+    <div class="d-flex flex-column pt-2">
+        <label for="name">Тип</label>
+        <p-dropdown formControlName="type" [options]="types" appendTo="body" placeholder="Any" autoWidth="false" [style]="{'width':'100%'}">
+
+            <ng-template pTemplate="selectedItem">
+                <p-tag [value]="getType(getTypeControll)" severity="success"></p-tag>
+            </ng-template>
+            <ng-template let-option pTemplate="item">
+                <p-tag [value]="getType(option.value)" severity="success"></p-tag>
+            </ng-template>
+        </p-dropdown>
+    </div>
+    <div class="d-flex flex-column pt-2">
+        <label for="name">Калорії</label>
+        <input pInputText type="number" formControlName="callories" >
+    </div>
+    <div class="d-flex flex-column pt-2">
+        <label for="name">Ціна</label>
+        <input pInputText type="number" formControlName="cost" >
+    </div>
+
+    <div class="pt-5">
+
+        <p-button label="Submit" (onClick)="submit()" type="submit" [disabled]="!productForm.valid"></p-button>
+    </div>
 
 </div>

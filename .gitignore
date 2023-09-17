@@ -1,6 +1,14 @@
 
 /venv/
+backend/env
+backend/backend/__pycache__
 
 front-end/.editorconfig
 front-end/package-lock.json
 
+
+
+backend/db.sqlite3
+backend/dish/__pycache__
+backend/dish/migrations/__pycache__
+backend/validators/__pycache__
