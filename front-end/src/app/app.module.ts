@@ -14,7 +14,7 @@ import { ProductsComponent } from './products/products.component';
 import { RecieptsComponent } from './reciepts/reciepts.component';
 import { MenuComponent } from './menu/menu.component';
 import { ButtonModule } from 'primeng/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +22,9 @@ import { ProductCreateComponent } from './products/product-create/product-create
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TagModule } from 'primeng/tag';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+
 
 @NgModule({
   declarations: [
@@ -47,8 +50,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     DynamicDialogModule,
     TagModule,
-    HttpClientModule
-    
+    HttpClientModule,
+    ReactiveFormsModule,
+    ConfirmDialogModule,
+    ToastModule 
   ],
   providers: [],
   bootstrap: [AppComponent],

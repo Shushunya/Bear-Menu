@@ -1,29 +1,48 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Product } from '../models/product.model';
+import { ProductCategory } from '../models/product-category';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  _baseUrl = "185.219.79.4"
+  _baseUrl = "http://127.0.0.1:8000/"
+
+  public _productTypes = new BehaviorSubject(null);
 
 
-  constructor( private http: HttpClient,) { }
+  constructor(private http: HttpClient,) { }
 
 
-  getProducts(){
-    // TODO integrate with BE
-    return [
-      { id: 1, calories: 100, cost: 100, name: 'Філе', type: "мясо" },
-      { id: 2, calories: 150, cost: 50, name: 'Ніжки', type: "мясо" },
-      { id: 3, calories: 50, cost: 5, name: 'Бульба', type: "овочі" }
-    ];
+  getProducts(): Observable<Product[]> {
+
+    let url = this._baseUrl + "api/products/";
+    return this.http.get<Product[]>(url);
+
   }
 
-  getProductTypes(){
-    return [{ label: 'In Stock', value: 'INSTOCK' },
-    { label: 'Low Stock', value: 'LOWSTOCK' },
-    { label: 'Out of Stock', value: 'OUTOFSTOCK' }];
+  getProductTypes(): Observable<any> {
+
+
+    let url = this._baseUrl + "api/products/";
+    return this.http.options(url);
+  }
+
+  updateProduct(product){
+    let url = this._baseUrl + `api/products/${product.id}/`;
+    return this.http.put(url, product);
+  }
+
+  createProduct(product: Product){
+    let url = this._baseUrl + 'api/products/';
+    return this.http.post(url, product);
+  }
+
+  deleteProduct(product){
+    let url = this._baseUrl + `api/products/${product.id}/`;
+    return this.http.delete(url);
   }
 }

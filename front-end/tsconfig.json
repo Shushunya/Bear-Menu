@@ -24,6 +24,7 @@
       "dom"
     ],
     "strictPropertyInitialization": false,
+    "noImplicitAny": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -31,6 +32,6 @@
     "strictInputAccessModifiers": false,
     "strictTemplates": true,
     "strictDomEventTypes": false,
-   
+ 
   }
 }

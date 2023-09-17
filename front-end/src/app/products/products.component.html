@@ -6,7 +6,7 @@
 
     <div class="card">
         <p-table #dt1 [value]="products" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
-            [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true"
+            [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true" editMode="row" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [globalFilterFields]="['name', 'type', 'cost', 'calories']">
             <ng-template pTemplate="caption">
@@ -35,8 +35,12 @@
                                 <ng-template pTemplate="filter" let-value let-filter="filterCallback">
                                     <p-dropdown [ngModel]="value" [options]="types" (onChange)="filter($event.value)"
                                         placeholder="Any">
+
+                                        <ng-template pTemplate="selectedItem">
+                                            <p-tag [value]="getType(value)" severity="success"></p-tag>
+                                        </ng-template>
                                         <ng-template let-option pTemplate="item">
-                                            <p-tag [value]="option.value" severity="success"></p-tag>
+                                            <p-tag [value]="getType(option.value)" severity="success"></p-tag>
                                         </ng-template>
                                     </p-dropdown>
                                 </ng-template>
@@ -75,11 +79,20 @@
                     <td>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
-                                <p-dropdown [options]="types" appendTo="body" [(ngModel)]="product.type"
-                                    [style]="{'width':'100%'}"></p-dropdown>
+                              
+                                <p-dropdown [(ngModel)]="product.type" [options]="types"  appendTo="body"
+                                placeholder="Any">
+
+                                <ng-template pTemplate="selectedItem">
+                                    <p-tag [value]="getType(product.type)" severity="success"></p-tag>
+                                </ng-template>
+                                <ng-template let-option pTemplate="item">
+                                    <p-tag [value]="getType(option.value)" severity="success"></p-tag>
+                                </ng-template>
+                            </p-dropdown>
                             </ng-template>
                             <ng-template pTemplate="output">
-                                {{product.type}}
+                                <p-tag [value]="getType(product.type)" severity="success"></p-tag>
                             </ng-template>
                         </p-cellEditor>
                     </td>
@@ -109,6 +122,9 @@
                         <div class="flex align-items-center justify-content-center gap-2">
                             <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
                                 (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
+                            <button *ngIf="!editing" pButton pRipple type="button"  icon="pi pi-ban
+                            "
+                                (click)="delete(product)" class="p-button-rounded p-button-text"></button>
                             <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
                                 (click)="onRowEditSave(product)"
                                 class="p-button-rounded p-button-text p-button-success mr-2"></button>
@@ -127,3 +143,10 @@
         </p-table>
     </div>
 </div>
+<p-confirmDialog #cd [style]="{width: '50vw'}">
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" label="ТА НУ НАХУЙ" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="ЄБАШ" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>
+<p-toast position="bottom-center"></p-toast>
