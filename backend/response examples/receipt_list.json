@@ -9,10 +9,10 @@
       "id": 1,
       "name": "Tasty potatoes",
       "cost": 100,
-      "mealType": "lunch",
+      "meal": "lunch",
       "complexity": 3,
       "time": 1,
-      "dishType": "salad"
+      "category": "salad"
     }
   ]
 }
