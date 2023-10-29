@@ -9,5 +9,5 @@ class ProductFilter(filters.FilterSet):
             'name': ['icontains'],
             'cost': ['lt', 'gt'],
             'calories': ['lt', 'gt'],
-            'type': ['exact']
+            'p_type': ['exact']
         }
