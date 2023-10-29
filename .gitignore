@@ -1,6 +1,7 @@
-
+.idea
 /venv/
-backend/env
+*/env
+__pycache__/
 backend/backend/__pycache__
 
 front-end/.editorconfig

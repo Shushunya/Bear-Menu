@@ -1,0 +1,136 @@
+{
+  "id": 10,
+  "category": "salad",
+  "meal": [
+    "supper",
+    "lunch"
+  ],
+  "ingredients": [
+    {
+      "product": {
+        "id": 23,
+        "name": "pickles",
+        "type": "pickles",
+        "cost": 120.5,
+        "calories": 200.3
+      },
+      "amount": 3
+    },
+    {
+      "product": {
+        "id": 22,
+        "name": "salad",
+        "type": "vegetable",
+        "cost": 90.5,
+        "calories": 20.3
+      },
+      "amount": 0.5
+    },
+    {
+      "product": {
+        "id": 2,
+        "name": "tomato",
+        "type": "vegetable",
+        "cost": 70.5,
+        "calories": 15.3
+      },
+      "amount": 1
+    },
+    {
+      "product": {
+        "id": 4,
+        "name": "green onion",
+        "type": "vegetable",
+        "cost": 19.8,
+        "calories": 5.3
+      },
+      "amount": 0.3
+    },
+    {
+      "product": {
+        "id": 23,
+        "name": "pickles",
+        "type": "pickles",
+        "cost": 120.5,
+        "calories": 200.3
+      },
+      "amount": 3
+    }
+  ],
+  "portions": 2,
+  "cost": 200,
+  "calories": 250,
+  "time": 1.5,
+  "complexity": 4,
+  "instruction": {
+    "amount of steps": 10,
+    "prep receipts count": 2,
+    "prep receipts": [
+      {
+        "id": 1,
+        "ingredients": [
+          {
+            "product": {
+              "id": 11,
+              "name": "potatoes",
+              "type": "vegetable",
+              "cost": 10.5,
+              "calories": 200.3
+            },
+            "amount": 0.5
+          }
+        ],
+        "portions": 2,
+        "cost": 20,
+        "calories": 100,
+        "time": 1,
+        "complexity": 2,
+        "instruction": {
+          "amount of steps": 3,
+          "prep receipts count": 0,
+          "prep receipts": [],
+          "prep time": 0.5,
+          "cooking time": 1,
+          "steps": [
+            {
+              "id": 4,
+              "text": "Wash potatoes & boil them for 30 min",
+              "is_prep": false
+            },
+            {
+              "id": 5,
+              "text": "Chop potatoes & add spicies",
+              "is_prep": false
+            },
+            {
+              "id": 8,
+              "text": "heat up oven to 180C. bake potatoes for 10 min",
+              "is_prep": false
+            }
+          ]
+        }
+      }
+    ],
+    "prep time": 1,
+    "cooking time": 1,
+    "steps": [
+      {
+        "id": 1,
+        "text": "Wash vegetables",
+        "time": 0.2,
+        "is_prep": true
+      },
+      {
+        "id": 2,
+        "text": "Chop vegetables",
+        "is_prep": false
+      },
+      {
+        "id": 3,
+        "text": "Mix everything & put some souce on",
+        "is_prep": false
+      }
+    ]
+  }
+}
+
